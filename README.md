@@ -7,6 +7,10 @@ folder (where you can tar them up and
 
 ## Inputs
 
+- `cmd` - Docker command to run. This can be the name of a command on the
+  shell's `$PATH`, or an absolute path to a binary within the image.
+  Defaults to "docker".
+
 - `dest` - Destination folder to write to. If not provided, logs will be
   written to stdout. If provided, the folder will be created if it doesn't
   exist, and files will be written based on container names (e.g. 'redis.log').
@@ -68,4 +72,14 @@ folder (where you can tar them up and
   uses: jwalton/gh-docker-logs@v1
   with:
     shell: '/bin/sh'
+```
+
+## Dump all logs on a failure using podman
+
+```yaml
+- name: Dump podman logs on failure using different shell
+  if: failure()
+  uses: jwalton/gh-docker-logs@v1
+  with:
+    cmd: 'podman'
 ```

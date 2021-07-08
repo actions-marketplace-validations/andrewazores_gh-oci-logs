@@ -7,6 +7,7 @@ const dest = core.getInput('dest') || undefined;
 const images = core.getInput('images') || undefined;
 const tail = core.getInput('tail') || 'all';
 const shell = core.getInput('shell') || '/bin/sh';
+const cmd = core.getInput('cmd') || 'docker';
 
 const imagesFilter = typeof images === 'string' ? images.split(',') : undefined;
 
@@ -31,7 +32,7 @@ function run(cmd, options = {}) {
 
 function getContainers() {
     const ps = run(
-        'docker ps -a --format "table {{.ID}},{{.Image}},{{.Names}},{{.Status}}" --no-trunc'
+        `${cmd} ps -a --format "table {{.ID}},{{.Image}},{{.Names}},{{.Status}}" --no-trunc`
     );
     // `slice(1)` to remove the 'CONTAINER_ID,IMAGE,NAMES' header.
     const psLines = ps.split(/\r?\n/).slice(1);
@@ -78,12 +79,12 @@ for (const container of filteredContainers) {
         console.log(`* Status: ${container.status}`);
         console.log('**********************************************************************');
 
-        run(`docker logs ${logsOptions} ${container.id}`, { passthrough: true });
+        run(`${cmd} logs ${logsOptions} ${container.id}`, { passthrough: true });
     } else {
         const filename = `${container.name.replace(/[\/:]/g, '-')}.log`;
         const file = path.resolve(dest, filename);
         console.log(`Writing ${file}`);
         const out = fs.openSync(file, 'w');
-        run(`docker logs ${logsOptions}  ${container.id}`, { out });
+        run(`${cmd} logs ${logsOptions}  ${container.id}`, { out });
     }
 }
