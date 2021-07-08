@@ -1,5 +1,5 @@
 name: Collect OCI Container Logs
-author: aazores
+author: andrewazores
 description: Collect logs from all OCI containers.
 inputs:
   cmd:

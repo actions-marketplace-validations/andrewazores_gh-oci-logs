@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aazores/gh-oci-logs.git"
+    "url": "git+https://github.com/andrewazores/gh-oci-logs.git"
   },
   "keywords": [
     "github",
@@ -25,7 +25,7 @@
   "author": "Jason Walton",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/aazores/gh-oci-logs/issues"
+    "url": "https://github.com/andrewazores/gh-oci-logs/issues"
   },
-  "homepage": "https://github.com/aazores/gh-oci-logs#readme"
+  "homepage": "https://github.com/andrewazores/gh-oci-logs#readme"
 }
